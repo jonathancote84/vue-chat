@@ -1,0 +1,32 @@
+version '3'
+
+services: 
+    redis:
+        image: redis:4.0.5-alpine
+        networks:
+          - video-chat
+        ports: 
+          - 6379:6379
+        expose: 
+          - "6379"
+    chat1: 
+        build: . 
+        ports: 
+            -3000:3000
+        networks:
+            -video-chat
+        enviroment:
+            PORT: 3000
+    
+    chat2:
+        build: .
+        ports: 
+            -3001:3001
+        networks:
+            -video-chat
+        environment:
+            PORT: 3001
+
+networks: 
+    video-chat: 
+        
